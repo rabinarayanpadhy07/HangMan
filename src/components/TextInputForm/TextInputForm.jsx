@@ -4,10 +4,10 @@ import Button from "../Button/Button" ;
 
 function TextInputForm({ handleFormSubmit, handleTextInputChange, value, inputType, setInputType }) {
     return (
-        <form className="flex items-end" onSubmit={handleFormSubmit}>
-            <div className="mr-2 flex-1">
+        <form className="flex items-end m-5 gap-2" onSubmit={handleFormSubmit}>
+            <div className="flex-1">
                  <TextInput 
-                    label="Enter a word or phrase"
+                    label="Enter a word or phrase for your freinds"
                     type={inputType}
                     value={value}
                     onChange={handleTextInputChange}
@@ -15,7 +15,7 @@ function TextInputForm({ handleFormSubmit, handleTextInputChange, value, inputTy
             </div>
 
             <div>
-                <Button
+                <Button 
                     styleType="warning"
                     text={inputType === 'password' ? 'Show' : 'Hide'}
                     onClickHandler={() => setInputType(inputType === 'password' ? 'text' : 'password')}
