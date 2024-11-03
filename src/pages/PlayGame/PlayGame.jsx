@@ -10,19 +10,19 @@ function PlayGame() {
     const location = useLocation();
     const wordSelected = location.state?.wordSelected;
 
-    const handleLetterClick = function(letter) {
+    const handleLetterClick = (letter) => {
         if (wordSelected.toUpperCase().includes(letter)) {
             console.log('correct');
         } else {
             console.log('incorrect');
             setStep(step + 1);
         }
-        setUsedLetters([...usedLetters, letter]);
+        setUsedLetters((prev) => [...prev, letter]);
     };
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8 px-4 text-center">
-            <h1 className="text-4xl font-bold mb-6 text-indigo-600">Guess The Letters</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-6 text-indigo-600">Guess The Letters</h1>
 
             <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-3xl">
                 {/* Masked Text Display */}
@@ -48,7 +48,7 @@ function PlayGame() {
             {/* Restart Game Button */}
             <Link
                 to='/start'
-                className="text-white text-xl rounded-md hover:bg-red-700 bg-red-600 px-6 py-3 mt-4"
+                className="text-white text-lg md:text-xl rounded-md hover:bg-red-700 bg-red-600 px-4 md:px-6 py-2 md:py-3 mt-4 transition duration-300"
             >
                 Restart The Game
             </Link>
