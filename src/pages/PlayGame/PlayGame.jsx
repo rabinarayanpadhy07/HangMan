@@ -5,43 +5,55 @@ import { useState } from "react";
 import HangMan from "../../components/HangMan/Hangman";
 
 function PlayGame() {
-
     const [usedLetters, setUsedLetters] = useState([]);
-    const [step,setStep] = useState(0);
+    const [step, setStep] = useState(0);
     const location = useLocation();
-const wordSelected = location.state?.wordSelected;
+    const wordSelected = location.state?.wordSelected;
+
     const handleLetterClick = function(letter) {
         if (wordSelected.toUpperCase().includes(letter)) {
-            console.log('correct')
-        }else{
-            console.log('incorrect')
-            setStep(step+1);
+            console.log('correct');
+        } else {
+            console.log('incorrect');
+            setStep(step + 1);
         }
         setUsedLetters([...usedLetters, letter]);
-    }
+    };
 
     return (
-        <div>
-            <h1 className="text-3xl">Guess The Letters </h1>
-            
-            <MaskedText text={wordSelected} usedLetters={usedLetters} />
-            <hr/>
-        <div className="flex justify-between items-center">
-        <div className="basis-2/4">
-        <LetterButtons  text={wordSelected} usedLetters={usedLetters} onLetterClick={handleLetterClick} />
-        </div>
-         
-        <div className="basis-2/4 flex justify-center items-center">
-        <HangMan step={step}/>
-        </div>
-    
-        </div>
-        
-           
-            <hr />
+        <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8 px-4 text-center">
+            <h1 className="text-4xl font-bold mb-6 text-indigo-600">Guess The Letters</h1>
 
-            <Link to='/start' className="text-black-600 text-3xl rounded-md hover:text-black-700 bg-red-600 px-1 py-1 "> Restart The Game </Link>
+            <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-3xl">
+                {/* Masked Text Display */}
+                <MaskedText text={wordSelected} usedLetters={usedLetters} />
+                
+                <hr className="my-4"/>
+
+                <div className="flex flex-col md:flex-row justify-between items-center">
+                    {/* Letter Buttons Section */}
+                    <div className="md:basis-2/4 mb-4 md:mb-0">
+                        <LetterButtons text={wordSelected} usedLetters={usedLetters} onLetterClick={handleLetterClick} />
+                    </div>
+
+                    {/* Hangman Image Section */}
+                    <div className="md:basis-2/4 flex justify-center items-center">
+                        <HangMan step={step} />
+                    </div>
+                </div>
+            </div>
+
+            <hr className="my-6 w-full max-w-3xl"/>
+
+            {/* Restart Game Button */}
+            <Link
+                to='/start'
+                className="text-white text-xl rounded-md hover:bg-red-700 bg-red-600 px-6 py-3 mt-4"
+            >
+                Restart The Game
+            </Link>
         </div>
     );
 }
+
 export default PlayGame;
